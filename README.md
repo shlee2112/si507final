@@ -7,12 +7,17 @@ Sanghyun Lee
 ---
 
 ## Project Proposal
-[https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrqC4mvoIY]
+https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrqC4mvoIY
 
 
 ## Project Description
 
-This should be a brief description of what your project is and does.  
+My project will aggregate all basic information about US national parks from the [National Park Service](https://www.nps.gov/index.htm) website and will scrape 2018 visitors information from [Wikipedia](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States). The homepage route will have a brief introduction about the site, an explanation of each route, and number of national parks store in the dataset. There will be a route where a user can see all basic information about US national parks such as a name, locations and descriptions. In another route, the user will be able to select a state to view national parks from following state. Also, users will be able to find the most popular national parks in US with a bar chart of number of 2018 visitors using scraped Wikipedia data. All the data from websites will be cached as JSON files.
+
+
+## Milestones and Issues
+
+
 
 ## How to run
 
@@ -27,11 +32,12 @@ This should be a brief description of what your project is and does.
 3. (Optional): Markdown syntax to include an screenshot/image: ![alt text](image.jpg)
 
 ## Routes in this application
-- `/home` -> this is the home page
-- `/form` -> this route has a form for user input
-- `/result` -> this route is where the form sends the result...
-- `/newuser/<username>` -> this route also takes input of a name and shows you a greeting
+- `/` -> This is a welcome page with a brief introduction, an explanation of each route and number of national parks store in the dataset.
+- `/info` -> This page will show all the information of national parks in United States.
+- `/info/<statename>` -> This page will take input of a state name and will show information of national parks in a specific state.
+- `/mostpopular` -> This page will show a bar chart of park visitors in 2018 to view the most popular national park in US.
 
+<!--
 ## How to run tests
 1. First... (e.g. access a certain directory if necessary)
 2. Second (e.g. any other setup necessary)
@@ -88,4 +94,4 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 
 ### Submission
 - [ ] I included a link to my GitHub repository with the correct permissions on Canvas! (Did you though? Did you actually? Are you sure you didn't forget?)
-- [ ] I included a summary of my project and how I thought it went **in my Canvas submission**!
+- [ ] I included a summary of my project and how I thought it went **in my Canvas submission**! -->
