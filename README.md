@@ -2,12 +2,11 @@
 
 Sanghyun Lee
 
-[https://github.com/shlee2112/si507final](https://www.example.com)
 
 ---
 
 ## Project Proposal
-https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrqC4mvoIY
+[Dropbox Paper](https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrqC4mvoIY)
 
 
 ## Project Description
@@ -15,11 +14,8 @@ https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrq
 My project will aggregate all basic information about US national parks from the [National Park Service](https://www.nps.gov/index.htm) website and will scrape 2018 visitors information from [Wikipedia](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States). The homepage route will have a brief introduction about the site, an explanation of each route, and number of national parks store in the dataset. There will be a route where a user can see all basic information about US national parks such as a name, locations and descriptions. In another route, the user will be able to select a state to view national parks from following state. Also, users will be able to find the most popular national parks in US with a bar chart of number of 2018 visitors using scraped Wikipedia data. All the data from websites will be cached as JSON files.
 
 
-## Milestones and Issues
 
-
-
-## How to run
+<!-- ## How to run
 
 1. First, you should ... (e.g. install all requirements with `pip install -r requirements.txt`)
 2. Second, you should ... (e.g. run `python programname.py runserver` or whatever else is appropriate)
@@ -29,7 +25,7 @@ My project will aggregate all basic information about US national parks from the
 
 1. A useful instruction goes here
 2. A useful second step here
-3. (Optional): Markdown syntax to include an screenshot/image: ![alt text](image.jpg)
+3. (Optional): Markdown syntax to include an screenshot/image: ![alt text](image.jpg) -->
 
 ## Routes in this application
 - `/` -> This is a welcome page with a brief introduction, an explanation of each route and number of national parks store in the dataset.
@@ -78,19 +74,19 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 - [ ] Information stored in the database is viewed or interacted with in some way
 
 ### Additional Components (at least 6 required)
-- [ ] Use of a new module
-- [ ] Use of a second new module
-- [ ] Object definitions using inheritance (indicate if this counts for 2 or 3 of the six requirements in a parenthetical)
+- [x ] Use of a new module
+- [x ] Use of a second new module
+- [x ] Object definitions using inheritance (indicate if this counts for 2 or 3 of the six requirements in a parenthetical)
 - [ ] A many-to-many relationship in your database structure
 - [ ] At least one form in your Flask application
-- [ ] Templating in your Flask application
+- [x ] Templating in your Flask application
 - [ ] Inclusion of JavaScript files in the application
 - [ ] Links in the views of Flask application page/s
 - [ ] Relevant use of `itertools` and/or `collections`
-- [ ] Sourcing of data using web scraping
+- [x ] Sourcing of data using web scraping
 - [ ] Sourcing of data using web REST API requests
-- [ ] Sourcing of data using user input and/or a downloaded .csv or .json dataset
-- [ ] Caching of data you continually retrieve from the internet in some way
+- [x ] Sourcing of data using user input and/or a downloaded .csv or .json dataset
+- [x ] Caching of data you continually retrieve from the internet in some way
 
 ### Submission
 - [ ] I included a link to my GitHub repository with the correct permissions on Canvas! (Did you though? Did you actually? Are you sure you didn't forget?)
