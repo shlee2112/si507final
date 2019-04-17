@@ -33,6 +33,12 @@ My project will aggregate all basic information about US national parks from the
 - `/info/<statename>` -> This page will take input of a state name and will show information of national parks in a specific state.
 - `/mostpopular` -> This page will show a bar chart of park visitors in 2018 to view the most popular national park in US.
 
+
+## Database Diagram
+![Image of Database Diagram](https://github.com/shlee2112/si507final/blob/master/database_diagram.png)
+
+
+
 <!--
 ## How to run tests
 1. First... (e.g. access a certain directory if necessary)
