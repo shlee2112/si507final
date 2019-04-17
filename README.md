@@ -2,6 +2,8 @@
 
 Sanghyun Lee
 
+[To Do List](https://github.com/shlee2112/si507final/milestones)
+
 
 ---
 
@@ -37,26 +39,50 @@ My project will aggregate all basic information about US national parks from the
 ## Database Diagram
 ![Image of Database Diagram](https://github.com/shlee2112/si507final/blob/master/database_diagram.png)
 
+### Description
+In my database, there are **Parks**, **Cast**, and **Director**, tables.
+
+#### Parks
+**Parks** table has 7 variables: 'id', 'name', 'location', 'description', 'states', 'established_date', and 'visitors_2018'. 'id' is the primary key of this table. Also, 'states' has a many-to-one relationship with 'state' of **States** table.
+
+#### States
+**States** table has 4 variables: 'id', 'state', 'abbreviation' and 'url'. 'id' is the primary key, and 'state' has a one-to-many relationship with 'states' of **Parks** table.
 
 
-<!--
+
 ## How to run tests
-1. First... (e.g. access a certain directory if necessary)
-2. Second (e.g. any other setup necessary)
-3. etc (e.g. run the specific test file)
-NOTE: Need not have 3 steps, but should have as many as are appropriate!
+1. Cache and grab NPS info, then save as a csv file
+2. Grab Wikipedia data and merge with NPS.csv
+3. Show the most popular national park in US
 
 ## In this repository:
-- Directory Name
-  - File in directory
-  - File in directory
-- File name
-- File name
+- SI507project_tools.py
+- SI507project_tests.py
+- advanced_expiry_caching.py
+- templates
+  - index.html
+  - all_nps.html
+- cache
+  - 57 cache files
+- nps_info.csv
+- wiki_nps.csv
+- park_info.csv
+- database_diagram.png
+- README.md
+
+
+## Requirements
+
+You need to install **BeautifulSoup** to run this script and get National Sites information. To run this script, you need to install Flask into you computer, because it needs to import Flask when the script is running. You can look at my ***requirements.txt*** file to see all the applications I install to run the script successfully.
+
+#### requirement.txt
+
+***To be provided***
 
 ---
 ## Code Requirements for Grading
 Please check the requirements you have accomplished in your code as demonstrated.
-- [x] This is a completed requirement.
+- [ ] This is a completed requirement.
 - [ ] This is an incomplete requirement.
 
 Below is a list of the requirements listed in the rubric for you to copy and paste.  See rubric on Canvas for more details.
@@ -76,7 +102,7 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 - [ ] Includes at least 3 different routes
 - [ ] View/s a user can see when the application runs that are understandable/legible for someone who has NOT taken this course
 - [ ] Interactions with a database that has at least 2 tables
-- [ ] At least 1 relationship between 2 tables in database
+- [x ] At least 1 relationship between 2 tables in database
 - [ ] Information stored in the database is viewed or interacted with in some way
 
 ### Additional Components (at least 6 required)
@@ -87,7 +113,7 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 - [ ] At least one form in your Flask application
 - [x ] Templating in your Flask application
 - [ ] Inclusion of JavaScript files in the application
-- [ ] Links in the views of Flask application page/s
+- [x ] Links in the views of Flask application page/s
 - [ ] Relevant use of `itertools` and/or `collections`
 - [x ] Sourcing of data using web scraping
 - [ ] Sourcing of data using web REST API requests
@@ -96,4 +122,4 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 
 ### Submission
 - [ ] I included a link to my GitHub repository with the correct permissions on Canvas! (Did you though? Did you actually? Are you sure you didn't forget?)
-- [ ] I included a summary of my project and how I thought it went **in my Canvas submission**! -->
+- [ ] I included a summary of my project and how I thought it went **in my Canvas submission**!
