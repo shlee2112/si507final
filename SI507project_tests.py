@@ -7,14 +7,14 @@ from SI507project_tools import *
 ############################################################
 ####### Scrape/Clean/Save Data #######
 
-# ##NPS
-# scrapeNPS()
-#
-#
-# ##Wikipedia
-# url = 'https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States'
-# wikiScrape(url)
-#
+##NPS
+scrapeNPS()
+
+
+##Wikipedia
+url = 'https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States'
+wikiScrape(url)
+
 
 
 
