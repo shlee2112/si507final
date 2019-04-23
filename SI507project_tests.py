@@ -2,120 +2,59 @@
 
 from SI507project_tools import *
 import unittest
+import itertools
+
+class PartOne(unittest.TestCase):
+    def test_park_info_csv(self):
+        self.cleaned_file = open('park_info.csv','r')
+        self.row_reader = self.cleaned_file.readlines()
+        # print(self.row_reader) # For debug
+        self.assertTrue(self.row_reader[1].split(",")[0], "Testing that there is a Park / first value in the row at index 1")
+        self.assertTrue(self.row_reader[25].split(",")[0], "Testing that there is a Park / first value in the row at index 25")
+        self.cleaned_file.close()
+
+    def test_park_info2_csv(self):
+        cleaned_file = open('park_info.csv','r')
+        self.contents = cleaned_file.readlines()
+        cleaned_file.close()
+        self.assertTrue('"Birmingham Civil Rights","National Monument","AL"," In 1963, images of snarling police dogs unleashed against non-violent protesters and of children being sprayed with high-pressure hoses appeared in print and television news across the world. These dramatic scenes from Birmingham, Alabama, of violent police aggression against civil rights protesters were vivid examples of segregation and racial injustice in America. ","Alabama"\n' in self.contents, "Testing that the Harriet Tubman line exists correctly with formatted location & proper description in the clean file")
+        self.assertTrue('"Green Springs","None","Louisa County, VA"," Green Springs National Historic Landmark District in Virginia’s Piedmont encompasses over 14,000 acres. Its farmsteads offer a continuum of rural vernacular architecture in original context with minimal alteration. Landscapes and buildings, many predating the Civil War and connected to one another visually and through family relationships of early occupants, are today preserved through easements. ","Virginia"\n' in self.contents, "Testing that the Green Springs line exists correctly with formatted location & proper description in the clean file")
+
+class PartTwo(unittest.TestCase):
+    def test_states_csv(self):
+        self.cleaned_file = open('states.csv','r')
+        self.row_reader = self.cleaned_file.readlines()
+        # print(self.row_reader) # For debug
+        self.assertTrue(self.row_reader[1].split(",")[0], "Testing that there is a Park / first value in the row at index 1")
+        self.assertTrue(self.row_reader[25].split(",")[0], "Testing that there is a Park / first value in the row at index 25")
+        self.cleaned_file.close()
+
+    def test_states_csv2(self):
+        cleaned_file = open('states.csv','r')
+        self.contents = cleaned_file.readlines()
+        cleaned_file.close()
+        self.assertTrue('"Illinois","IL","https://www.nps.gov/state/il/index.htm"\n' in self.contents, "Testing that the Illinois line exists correctly with formatted abbreviation & proper URL in the clean file")
+        self.assertTrue('"Virgin Islands","VI","https://www.nps.gov/state/vi/index.htm"\n' in self.contents, "Testing that the Virgin Islands line exists correctly with formatted abbreviation & proper URL in the clean file")
 
 
-class StepOne(unittest.TestCase):
+class PartThree(unittest.TestCase):
+    def test_parks_csv(self):
+        self.cleaned_file = open('parks.csv','r')
+        self.row_reader = self.cleaned_file.readlines()
+        # print(self.row_reader) # For debug
+        self.assertTrue(self.row_reader[1].split(",")[0], "Testing that there is a Park / first value in the row at index 1")
+        self.assertTrue(self.row_reader[25].split(",")[0], "Testing that there is a Park / first value in the row at index 25")
+        self.cleaned_file.close()
 
-	def setUp(self):
-		self.dollar = Dollar(1)
-		self.pound = Pound(1)
-		self.yuan = Yuan(1)
-		self.dollar_mult = Dollar(12)
-
-	def test_subclasses_instance_of_currency(self):
-
-		self.assertIsInstance(self.dollar, Currency,"Testing that an instance of Dollar is an instance of a subclass of Currency") # Because you had to define this in such a way that it inherited from Currency -- it is possible for it not to be in the submitted code, hence the test
-		self.assertIsInstance(self.pound, Currency,"Testing that an instance of Pound is an instance of a subclass of Currency")
-		self.assertIsInstance(self.yuan, Currency,"Testing that an instance of Yollar is an instance of a subclass of Currency")
-
-	# Testing the three Currencies
-	def test_dollar_constructor(self):
-		self.assertEqual(self.dollar.base_rate, 1, "Testing that dollar's base_rate (that is, the base rate in the Currency class) is 1")
-		self.assertEqual(self.dollar_mult.base_rate, 1,"Testing that even with multiple dollar representation in an instance, the base rate is still 1")
-
-	def test_dollar_rate(self):
-		self.assertEqual(Dollar.rate, 20, "Testing that Dollar's rate is 20")
-		self.assertEqual(self.dollar_mult.rate, 20, "Testing that rate is set correctly for a dollar instance")
-
-	def test_dollar_unit_name(self):
-		self.assertEqual(Dollar.unit_name, "Dollar", "Testing that Dollar's unit name is correct")
-
-	def test_dollar_str(self):
-		hundred_dollars = Dollar(100)
-		self.assertEqual(self.dollar.__str__(), "1 Dollar", "Testing string method on Dollar class") # Note that this is an example of testing a string method -- can't test things printed, but can test things returned, and this is how you invoke __str__ !
-		self.assertEqual(hundred_dollars.__str__(), "100 Dollars", "Testing string method on Dollar class")
+    def test_parks_csv2(self):
+        cleaned_file = open('parks.csv','r')
+        self.contents = cleaned_file.readlines()
+        cleaned_file.close()
+        self.assertTrue('''18,Denali,"Denali Park, AK"," Denali is six million acres of wild land, bisected by one ribbon of road. Travelers along it see the relatively low-elevation taiga forest give way to high alpine tundra and snowy mountains, culminating in North America's tallest peak, 20,310' Denali. Wild animals large and small roam un-fenced lands, living as they have for ages. Solitude, tranquility and wilderness await. ",Alaska,"February 26, 1917",594660.0\n''' in self.contents, "Testing that the Alagnak line exists correctly with correct location, description, establish date and vistor numbers in the clean file")
+        self.assertTrue('''47,Petrified Forest,"Petrified Forest National Park, AZ"," Did you know that Petrified Forest is more spectacular than ever? While the park has all the wonders known for a century, there are many new adventures and discoveries to share. There are backcountry hikes into areas never open before such as Red Basin and little known areas like the Martha's Butte. There are new exhibits that bring the stories to life. Come rediscover Petrified Forest! ",Arizona,"December 9, 1962",644922.0\n''' in self.contents, "Testing that the Petrified Forest line exists correctly with correct location, description, establish date and vistor numbers in the clean file")
 
 
-	def test_pound_constructor(self):
-		self.assertEqual(self.pound.base_rate, 1, "Testing that pound constructor works properly")
 
-	def test_pound_rate(self):
-		self.assertEqual(Pound.rate, 15,"Testing that pound's rate is correct")
-
-	def test_pound_unit_name(self):
-		self.assertEqual(Pound.unit_name, "Pound", "Testing pound's unit name")
-
-	def test_pound_str(self):
-		hundred_pounds = Pound(100)
-		self.assertEqual(self.pound.__str__(), "1 Pound", "Testing Pound's string method")
-		self.assertEqual(hundred_pounds.__str__(), "100 Pounds", "Testing Pound's string method")
-
-
-	def test_yuan_constructor(self):
-		self.assertEqual(self.yuan.base_rate, 1, "Testing base rate of Yuan class (does it inherit from Currency correctly)")
-
-	def test_yuan_rate(self):
-		self.assertEqual(Yuan.rate, 8,"Testing that Yuan rate is correct")
-
-	def test_yuan_unit_name(self):
-		self.assertEqual(Yuan.unit_name, "Yuan","Testing that Yuan unit name is correct")
-
-	def test_yuan_str(self):
-		hundred_yuan = Yuan(100)
-		self.assertEqual(self.yuan.__str__(), "1 Yuan","Testing Yuan string method")
-		self.assertEqual(hundred_yuan.__str__(), "100 Yuan","Testing Yuan string method")
-
-	# Testing conversion
-	def test_currency_conversion(self):
-		self.assertEqual(self.yuan.conversion(Pound).__str__(), "0.5333333333333333 Pound", "Testing currency conversion with Yuan to Pound")
-		self.assertEqual(self.pound.conversion(Dollar).__str__(), "0.75 Dollar","Testing currency conversion with Pound to Dollar")
-
-	def tearDown(self):
-		del(self.dollar)
-		del(self.pound)
-		del(self.yuan)
-
-class StepTwo(unittest.TestCase):
-
-	def setUp(self):
-		self.jpMorgan = Bank("J.P.Morgan", Dollar, 10000)
-		self.bearsterns = Bank("Bear Sterns", Dollar)
-		self.bankOfChina = Bank("Bank of China", Yuan, 10000)
-
-	def test_bank_constructor_name(self):
-		self.assertEqual(self.jpMorgan.name, "J.P.Morgan", "Testing Bank constructor")
-		self.assertEqual(self.bearsterns.name, "Bear Sterns", "Testing Bank constructor")
-
-	def test_bank_default_constructor(self):
-		self.assertTrue(self.bearsterns.current_account.value == 0,"Testing that default initial value from Bank constructor is 0")
-
-	def test_bank_constructor_unit(self):
-		self.assertTrue(issubclass(self.jpMorgan.unit, Currency), "Testing that Bank's unit is a subclass of Currency - Dollar, Yuan, or Pound")
-		self.assertEqual(self.jpMorgan.unit, Dollar, "Testing an instance of Bank's setting of its unit in constructor, e.g. Dollar")
-		self.assertEqual(self.bankOfChina.unit, Yuan, "Testing an instance of Bank's setting of its unit in constructor, e.g. Yuan")
-
-	def test_bank_constructor_current_account(self):
-		self.assertEqual(self.jpMorgan.current_account.value, 10000, "Testing value of bank from constructor's invocation")
-		self.assertEqual(self.bankOfChina.current_account.value, 10000,"Testing value of bank from constructor's invocation")
-
-	def test_bank_str(self):
-		self.assertEqual(self.jpMorgan.__str__(),
-			"J.P.Morgan Bank holds the Dollar currency and currently holds 10000 of Dollar","Testing string method of Bank")
-
-		self.assertEqual(self.bankOfChina.__str__(),
-			"Bank of China Bank holds the Yuan currency and currently holds 10000 of Yuan","Testing string method of Bank")
-
-	def test_bank_deposit(self):
-		d = Dollar(1)
-		y = Yuan(1)
-		self.assertEqual(self.bankOfChina.deposit(d), 'ERROR: cannot deposit that currency.',"Testing deposit of wrong currency")
-		self.assertEqual(self.bankOfChina.deposit(y), 'successful deposit',"Testing successful deposit")
-		self.assertEqual(self.bankOfChina.deposit(100), 'ERROR: cannot deposit that currency.',"Testing invalid deposit")
-
-	def tearDown(self):
-		del(self.jpMorgan)
-		del(self.bearsterns)
-		del(self.bankOfChina)
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

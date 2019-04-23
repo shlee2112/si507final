@@ -1,6 +1,6 @@
 # SI 507: Final Project
 
-Sanghyun Lee
+##Sanghyun Lee
 
 [To Do List](https://github.com/shlee2112/si507final/milestones)
 
