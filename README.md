@@ -43,7 +43,7 @@ My project will aggregate all basic information about US national parks from the
 In my database, there are **Parks**, **Cast**, and **Director**, tables.
 
 #### Parks
-**Parks** table has 7 variables: 'id', 'name', 'location', 'description', 'states', 'established_date', and 'visitors_2018'. 'id' is the primary key of this table. Also, 'states' has a many-to-one relationship with 'state' of **States** table.
+**Parks** table has 7 variables: 'id', 'name', 'location', 'description', 'state', 'established_date', and 'visitors_2018'. 'id' is the primary key of this table. Also, 'states' has a many-to-one relationship with 'state' of **States** table.
 
 #### States
 **States** table has 4 variables: 'id', 'state', 'abbreviation' and 'url'. 'id' is the primary key, and 'state' has a one-to-many relationship with 'states' of **Parks** table.
@@ -62,33 +62,24 @@ In my database, there are **Parks**, **Cast**, and **Director**, tables.
 - templates
   - index.html
   - all_nps.html
+  - bystate.html
+  - mostpopular.html
 - cache
-  - 57 cache files
-- nps_info.csv
-- wiki_nps.csv
-- park_info.csv
+  - 57 cached JSON files from NPS.gov
+- example_files
+  - wiki_nps.csv
+  - states.csv
+  - parks.db
+  - parks.csv
+  - park_info.csv
 - database_diagram.png
+- requirements.txt
 - README.md
 
 
 ## Requirements
 
 You need to install **BeautifulSoup** to run this script and get National Sites information. To run this script, you need to install Flask into you computer, because it needs to import Flask when the script is running. You can look at my ***requirements.txt*** file to see all the applications I install to run the script successfully.
-
-### IMPORTANT (If running into a matplotlib problem)
-***To be able to run my script using virtualenv, you may need to reinstall Python as a framework.***
-***If you get a message like this:***
-```
-from matplotlib.backends import _macosx
-RuntimeError: Python is not installed as a framework. The Mac OS X backend will not be able to function correctly if Python is not installed as a framework. See the Python documentation for more information on installing Python as a framework on Mac OS X. Please either reinstall Python as a framework, or try one of the other backends. If you are using (Ana)Conda please install python.app and replace the use of 'python' with 'pythonw'. See 'Working with Matplotlib on OSX' in the Matplotlib FAQ for more information.
-```
-***Please follow*** [here](https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrqC4mvoIY) ***to fix the problem, or try the following:***
-
-```
-echo "backend: TkAgg" >> ~/.matplotlib/matplotlibrc
-brew uninstall python3
-brew install python3 --with-tcl-tk
-```
 
 #### requirement.txt
 - alabaster==0.7.12
@@ -141,6 +132,26 @@ brew install python3 --with-tcl-tk
 - tabulate==0.8.3
 - urllib3==1.24.1
 - Werkzeug==0.15.2
+
+
+## IMPORTANT (If running into a matplotlib problem)
+***To be able to run my script using virtualenv, you may need to reinstall Python as a framework.***
+***If you get a message like this:***
+```
+from matplotlib.backends import _macosx
+RuntimeError: Python is not installed as a framework. The Mac OS X backend will not be able to function correctly if Python is not installed as a framework. See the Python documentation for more information on installing Python as a framework on Mac OS X. Please either reinstall Python as a framework, or try one of the other backends. If you are using (Ana)Conda please install python.app and replace the use of 'python' with 'pythonw'. See 'Working with Matplotlib on OSX' in the Matplotlib FAQ for more information.
+```
+***Please follow*** [here](https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrqC4mvoIY) ***to fix the problem, or try the following:***
+
+```
+echo "backend: TkAgg" >> ~/.matplotlib/matplotlibrc
+brew uninstall python3
+brew install python3 --with-tcl-tk
+```
+
+
+
+
 
 
 ---
