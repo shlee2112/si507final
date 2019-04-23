@@ -1,4 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>National Parks in United States</title>
+</head>
+  <style>
+    body{
+      margin: 30px 50px;
+    }
+    strong{
+      color: blue;
+    }
 
-<div class="page-header">
-    <h1>{% if num_nps %}{{ num_nps }}{% else %}0{% endif %} national parks saved.</h1>
-</div>
+    p{
+      font-size: 18px;
+    }
+    footer{
+      margin-top: 3em;
+    }
+    .route{
+      margin-top: 3em;
+    }
+
+  </style>
+
+<body>
+  <nav>
+    <a href="{{ url_for('index')}}">Home</a> |
+    <a href="{{ url_for('info')}}">Info</a> |
+    <a href="{{ url_for('popular')}}">Most Popular</a>
+  </nav>
+
+  <h1>Welcome to National Parks Website!</h1>
+  <br>
+  <br>
+  <div class="page-header">
+      <p>In this website, you can explore <strong>{% if num_nps %}{{ num_nps }}{% else %}0{% endif %}</strong> national parks in United States.</p>
+  </div>
+
+  <div class="route">
+    <p>Route Description</p>
+    <ul>
+      <li><strong>/</strong>
+          <p>This is a welcome page with a brief introduction, an explanation of each route and number of national parks store in the dataset.</p>
+      </li>
+        <br>
+      <li><strong>/info</strong>
+        <p>This page will show all the information of national parks in United States.</p>
+      </li>
+        <br>
+      <li><strong>/info/<i>statename</i></strong>
+        <p>This page will take input of a state name and will show information of national parks in a specific state.</p>
+      </li>
+        <br>
+      <li><strong>/mostpopular</strong>
+        <p>This page will show a barplot of park visitors in 2018 to view the most popular national park in US.
+        </p>
+      </li>
+    </ul>
+
+  </div>
+
+  <footer><p class="footer">Created by <strong>Sanghyun Lee</strong></p></footer>
+</body>
+</html>

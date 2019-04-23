@@ -33,7 +33,7 @@ My project will aggregate all basic information about US national parks from the
 - `/` -> This is a welcome page with a brief introduction, an explanation of each route and number of national parks store in the dataset.
 - `/info` -> This page will show all the information of national parks in United States.
 - `/info/<statename>` -> This page will take input of a state name and will show information of national parks in a specific state.
-- `/mostpopular` -> This page will show a bar chart of park visitors in 2018 to view the most popular national park in US.
+- `/mostpopular` -> This page will show a barplot of park visitors in 2018 to view the most popular national park in US.
 
 
 ## Database Diagram

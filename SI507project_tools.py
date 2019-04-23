@@ -4,15 +4,23 @@ import os
 from bs4 import BeautifulSoup
 import requests
 import json
+import csv
 import pandas as pd
 from advanced_expiry_caching import Cache
-from flask import Flask, render_template, session, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 from matplotlib import pyplot as plt
 import seaborn as sns
+from sqlalchemy import Column, Integer, Float, Date, String, VARCHAR
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from flask import Flask, render_template, session, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+import io
+import base64
 
 
-
+############################################################
+############################################################
 ###### Scraping NPS Function ######
 
 def scrapeNPS():
@@ -41,14 +49,11 @@ def scrapeNPS():
 
 
 
+
     ##### Creating a new CSV called 'park_info'
     new_file = open('park_info.csv', 'w', encoding='utf8')
     new_file.write('name,type,location,description,state')
     new_file.write('\n')
-
-
-
-    ##### Scraping all parks information and save it as a CSV
     for states in state_lst:
 
         ##### Cache by states
@@ -86,9 +91,47 @@ def scrapeNPS():
 
 
 
+    ##### Save all States info and save as a csv
+    new_state_file = open('states.csv', 'w', encoding='utf8')
+    new_state_file.write('state,abbreviation,url')
+    new_state_file.write('\n')
+
+    for states in state_lst:
+
+        ##### Cache by states
+        name = states.split("/")
+        abbr = name[2].upper()
+        url = "https://www.nps.gov" + states
+        data = requests.get(url).text
+
+        soup = BeautifulSoup(data, "html.parser")
+
+
+        ##### Scrap state's name and all parks
+        state = soup.find("h1", "page-title")
+        list = soup.find_all('div', {'class':'list_left'})
+
+        state_name = ""
+        for park in list:
+            state = state.string
+
+        row_string = '"{}","{}","{}"'.format(state, abbr, url)
+        new_state_file.write(row_string)
+        new_state_file.write('\n')
+
+    new_state_file.close()
 
 
 
+
+
+
+
+
+
+
+############################################################
+############################################################
 ###### Scraping Wikipedia Function ######
 
 def wikiScrape(wiki_url, scrape_num = 1):
@@ -112,26 +155,44 @@ def wikiScrape(wiki_url, scrape_num = 1):
     ## Open 'park_info.csv' to merge the data together
     nps_park = pd.read_csv('park_info.csv')
     nps_info = nps_park.merge(wiki_nps_cleaned, on='name', how='left')
+    nps_info = nps_info.drop(['type'], axis=1)
 
 
     ## Save the merged data as a CSV file
-    nps_info.to_csv('nps_info.csv', encoding='utf-8')
+    nps_info.to_csv('parks.csv', encoding='utf-8')
 
 
 
 
 
+
+
+############################################################
+############################################################
 ###### Barplot Function ######
-class Popular():
+class Barplot():
     def __init__(self, data):
         self.data = data
 
     def barplot(self, x='name', y='visitors_2018'):
-        plt.figure(figsize=(45,10))
+        img = io.BytesIO()
+        plt.figure(figsize=(50,35))
         sns.set(font_scale=2)
-        sns.barplot(x,y,data=self.data.dropna())
+        barplot = sns.barplot(x,y,data=self.data.dropna())
+        barplot.set_title('# of National Parks Visitors in 2018')
         plt.xticks(rotation=90)
-        plt.show()
+        plt.xlabel('National Parks')
+        plt.ylabel('# of Visitors')
+        plt.savefig(img, format='png')
+        # fig = barplot.get_figure()
+        # return barplot
+
+        img.seek(0)
+        graph_url = base64.b64encode(img.getvalue()).decode()
+        plt.close()
+        # fig.savefig("nps_visitors_2018.jpg", format='png')
+        # plt.show()
+        return 'data:image/png;base64,{}'.format(graph_url)
 
     def mostpopular(self):
         name = self.data.loc[self.data['visitors_2018'].idxmax()]['name']
@@ -142,45 +203,128 @@ class Popular():
 
 
 
-#
-# ###### Setting up for database ######
-#
-# app = Flask(__name__)
-# app.debug = True
-# app.use_reloader = True
-# app.config['SECRET_KEY'] = 'hard to guess string for app security adgsdfsadfdflsdfsj'
-#
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./parks.db'
-# app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#
-#
-# # Set up Flask debug stuff
-# db = SQLAlchemy(app) # For database use
-# session = db.session # to make queries easy
-#
-#
-#
-#
-#
-# ##### Set up Models #####
-#
-#
-# class Parks(db.Model):
-#     __tablename__ = "Parks"
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(64))
-#     location = db.Column(db.String(64))
-#     description = db.Column(db.String(64))
-#     states = db.relationship('States', secondary=association, backref=db.backref('states', lazy='dynamic'), lazy='dynamic')
-#     established_date = db.Column(db.String(64))
-#     visitors_2018 = db.Column(db.Integer(64))
-#
-#
-#
-# class States(db.Model):
-#     __tablename__ = "States"
-#     id = db.Column(db.Integer, primary_key=True)
-#     state = db.Column(db.String(64))
-#     abbreviation = db.Column(db.String(64))
-#     url = db.Column(db.String(64))
+
+
+
+
+###########################################################
+###########################################################
+##### Setup for database ######
+
+
+app = Flask(__name__)
+app.debug = True
+app.use_reloader = True
+app.config['SECRET_KEY'] = 'hard to guess string for app security adgsdfsadfdflsdfsj'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./parks.db'
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+# Set up Flask debug stuff
+db = SQLAlchemy(app) # For database use
+session = db.session # to make queries easy
+
+
+
+
+##### Set up Models #####
+
+class Parks(db.Model):
+    __tablename__ = "Parks"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    location = db.Column(db.String(64))
+    description = db.Column(db.String(64))
+    state = db.Column(db.Integer, db.ForeignKey("States.state"))
+    established_date = db.Column(db.String(64))
+    visitors_2018 = db.Column(db.Integer)
+
+
+class States(db.Model):
+    __tablename__ = "States"
+    id = db.Column(db.Integer, primary_key=True)
+    state = db.Column(db.String(64))
+    abbreviation = db.Column(db.String(64))
+    url = db.Column(db.String(64))
+
+
+
+
+
+##### Import CSV to DB #####
+def csv_import():
+    Base = declarative_base()
+
+    engine = create_engine('sqlite:///./parks.db')
+    Base.metadata.create_all(engine)
+    parks_file = 'parks.csv'
+    parks = pd.read_csv(parks_file)
+    parks = parks.drop(['Unnamed: 0'], axis=1)
+    parks.state = parks.state.str.lower()
+    parks.to_sql(con=engine, index_label='id', name=Parks.__tablename__, if_exists='replace')
+
+    states_file = 'states.csv'
+    states = pd.read_csv(states_file)
+    states.state = states.state.str.lower()
+    states.to_sql(con=engine, index_label='id', name=States.__tablename__, if_exists='replace')
+
+
+
+
+
+
+
+
+# ############################################################
+# ############################################################
+# ###### Flask #######
+
+
+
+# Homepage
+@app.route('/')
+def index():
+    parks = Parks.query.all()
+    num_nps = len(parks)
+    return render_template('index.html', num_nps=num_nps)
+
+# All the information of national parks in US
+@app.route('/info')
+def info():
+    all_nps = []
+    parks = Parks.query.all()
+    for p in parks:
+        all_nps.append((p.name, p.location, p.description, p.state))
+    return render_template('all_nps.html', all_parks=all_nps)
+
+
+# Information of national parks in a specific state.
+@app.route('/info/<statename>')
+def state(statename):
+    if Parks.query.filter_by(state=statename).first():
+        bystate = []
+        parks = Parks.query.filter_by(state=statename).all()
+        for p in parks:
+            bystate.append((p.name, p.location, p.description))
+        return render_template('bystate.html', all_parks=bystate, state=statename.upper())
+    else:
+        return "There are no national park in " + statename
+
+
+# Most popular national park in US in 2018.
+@app.route('/mostpopular')
+def popular():
+    dataset = pd.read_csv('parks.csv')
+    nps_barplot = Barplot(dataset)
+    info = nps_barplot.mostpopular()
+    img = nps_barplot.barplot()
+
+    return render_template('mostpopular.html', info=info, nps_graph=img )
+
+
+
+if __name__ == "__main__":
+    db.create_all()
+    app.run()

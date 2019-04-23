@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>National Parks in United States: Most Popular Park</title>
+</head>
+<style>
+  body{
+      margin: 30px 50px;
+  }
+  strong{
+    color: blue;
+  }
+
+  p{
+    font-size: 18px;
+  }
+
+  img{
+    width: 100%;
+
+  }
+  footer{
+    margin-top: 3em;
+  }
+
+
+</style>
+
+<body style="padding:10;">
+  <nav>
+    <a href="{{ url_for('index')}}">Home</a> |
+    <a href="{{ url_for('info')}}">Info</a> |
+    <a href="{{ url_for('popular')}}">Most Popular</a>
+  </nav>
+
+  <h1>Most Popular National Park in United States</h1>
+  <br>
+  <br>
+  <div class="">
+    <p>{% if info %}{{ info }}{% else %}0{% endif %}.</p>
+
+    <img src="{{ nps_graph }}" alt="National Parks Visitors 2018">
+    <!-- <img src="{{ url_for('static', filename = '/nps_visitors_2018.jpg') }}" alt="National Parks Visitors in 2018"> -->
+  </div>
+
+
+  <footer><p class="footer">Created by <strong>Sanghyun Lee</strong></p></footer>
+
+</body>
+</html>
