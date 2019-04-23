@@ -81,7 +81,7 @@ You need to install **BeautifulSoup** to run this script and get National Sites 
 from matplotlib.backends import _macosx
 RuntimeError: Python is not installed as a framework. The Mac OS X backend will not be able to function correctly if Python is not installed as a framework. See the Python documentation for more information on installing Python as a framework on Mac OS X. Please either reinstall Python as a framework, or try one of the other backends. If you are using (Ana)Conda please install python.app and replace the use of 'python' with 'pythonw'. See 'Working with Matplotlib on OSX' in the Matplotlib FAQ for more information.
 ```
-***Please follow*** [here](https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrqC4mvoIY)***to fix the problem, or try the following:***
+***Please follow*** [here](https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrqC4mvoIY) ***to fix the problem, or try the following:***
 
 ```
 echo "backend: TkAgg" >> ~/.matplotlib/matplotlibrc
