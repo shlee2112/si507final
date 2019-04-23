@@ -76,6 +76,57 @@ In my database, there are **Parks**, **Cast**, and **Director**, tables.
 You need to install **BeautifulSoup** to run this script and get National Sites information. To run this script, you need to install Flask into you computer, because it needs to import Flask when the script is running. You can look at my ***requirements.txt*** file to see all the applications I install to run the script successfully.
 
 #### requirement.txt
+- alabaster==0.7.12
+- atomicwrites==1.3.0
+- attrs==19.1.0
+- Babel==2.6.0
+- beautifulsoup4==4.7.1
+- certifi==2019.3.9
+- chardet==3.0.4
+- Click==7.0
+- cycler==0.10.0
+- dataframe==0.2.1.3
+- docutils==0.14
+- Flask==1.0.2
+- Flask-SQLAlchemy==2.3.2
+- idna==2.8
+- imagesize==1.1.0
+- itsdangerous==1.1.0
+- Jinja2==2.10.1
+- kiwisolver==1.0.1
+- lxml==4.3.3
+- MarkupSafe==1.1.1
+- matplotlib==3.0.3
+- more-itertools==7.0.0
+- nose==1.3.7
+- numpy==1.16.3
+- packaging==19.0
+- pandas==0.24.2
+- pluggy==0.9.0
+- py==1.8.0
+- Pygments==2.3.1
+- pyparsing==2.4.0
+- pytest==4.4.1
+- python-dateutil==2.8.0
+- pytz==2019.1
+- requests==2.21.0
+- scipy==1.2.1
+- seaborn==0.9.0
+- six==1.12.0
+- snowballstemmer==1.2.1
+- soupsieve==1.9
+- Sphinx==2.0.1
+- sphinxcontrib-applehelp==1.0.1
+- sphinxcontrib-devhelp==1.0.1
+- sphinxcontrib-htmlhelp==1.0.2
+- sphinxcontrib-jsmath==1.0.1
+- sphinxcontrib-qthelp==1.0.2
+- sphinxcontrib-serializinghtml==1.1.3
+- SQLAlchemy==1.3.3
+- tabulate==0.8.3
+- urllib3==1.24.1
+- Werkzeug==0.15.2
+
 
 ***To be provided***
 
