@@ -75,8 +75,9 @@ In my database, there are **Parks**, **Cast**, and **Director**, tables.
 
 You need to install **BeautifulSoup** to run this script and get National Sites information. To run this script, you need to install Flask into you computer, because it needs to import Flask when the script is running. You can look at my ***requirements.txt*** file to see all the applications I install to run the script successfully.
 
-### IMPORTANT (Running into matplotlib problem)
-***To be able to run my script using virtualenv, you may need to install Python as a framework. If you get a message like this:***
+### IMPORTANT (If running into a matplotlib problem)
+***To be able to run my script using virtualenv, you may need to reinstall Python as a framework.***
+***If you get a message like this:***
 ```
 from matplotlib.backends import _macosx
 RuntimeError: Python is not installed as a framework. The Mac OS X backend will not be able to function correctly if Python is not installed as a framework. See the Python documentation for more information on installing Python as a framework on Mac OS X. Please either reinstall Python as a framework, or try one of the other backends. If you are using (Ana)Conda please install python.app and replace the use of 'python' with 'pythonw'. See 'Working with Matplotlib on OSX' in the Matplotlib FAQ for more information.
