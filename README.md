@@ -37,7 +37,7 @@ My project will aggregate all basic information about US national parks from the
 
 
 ## Database Diagram
-![Image of Database Diagram](https://github.com/shlee2112/si507final/blob/master/database_diagram.png)
+![Image of Database Diagram](https://github.com/shlee2112/si507final/blob/master/img/database_diagram.png)
 
 ### Description
 In my database, there are **Parks**, **Cast**, and **Director**, tables.
