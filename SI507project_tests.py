@@ -2,7 +2,6 @@
 
 from SI507project_tools import *
 import unittest
-import itertools
 
 class PartOne(unittest.TestCase):
     def test_park_info_csv(self):
@@ -52,6 +51,19 @@ class PartThree(unittest.TestCase):
         cleaned_file.close()
         self.assertTrue('''18,Denali,"Denali Park, AK"," Denali is six million acres of wild land, bisected by one ribbon of road. Travelers along it see the relatively low-elevation taiga forest give way to high alpine tundra and snowy mountains, culminating in North America's tallest peak, 20,310' Denali. Wild animals large and small roam un-fenced lands, living as they have for ages. Solitude, tranquility and wilderness await. ",Alaska,"February 26, 1917",594660.0\n''' in self.contents, "Testing that the Alagnak line exists correctly with correct location, description, establish date and vistor numbers in the clean file")
         self.assertTrue('''47,Petrified Forest,"Petrified Forest National Park, AZ"," Did you know that Petrified Forest is more spectacular than ever? While the park has all the wonders known for a century, there are many new adventures and discoveries to share. There are backcountry hikes into areas never open before such as Red Basin and little known areas like the Martha's Butte. There are new exhibits that bring the stories to life. Come rediscover Petrified Forest! ",Arizona,"December 9, 1962",644922.0\n''' in self.contents, "Testing that the Petrified Forest line exists correctly with correct location, description, establish date and vistor numbers in the clean file")
+
+
+class PartFour(unittest.TestCase):
+    def setUp(self):
+        dataset = pd.read_csv('parks.csv')
+        self.barplot = Barplot(dataset)
+
+    def test_barplot_most_popular(self):
+        self.assertEqual(self.barplot.mostpopular(), "Great Smoky Mountains had 11421200.0 visitors in 2018","Testing whether the most popular national park is Smoky Mountains or not")
+
+    def tearDown(self):
+	    del(self.barplot)
+
 
 
 
