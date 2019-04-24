@@ -1,6 +1,6 @@
 # SI 507: Final Project
 
-##Sanghyun Lee
+## Sanghyun Lee
 
 [To Do List](https://github.com/shlee2112/si507final/milestones)
 
@@ -13,47 +13,44 @@
 
 ## Project Description
 
-My project will aggregate all basic information about US national parks from the [National Park Service](https://www.nps.gov/index.htm) website and will scrape 2018 visitors information from [Wikipedia](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States). The homepage route will have a brief introduction about the site, an explanation of each route, and number of national parks store in the dataset. There will be a route where a user can see all basic information about US national parks such as a name, locations and descriptions. In another route, the user will be able to select a state to view national parks from following state. Also, users will be able to find the most popular national parks in US with a bar chart of number of 2018 visitors using scraped Wikipedia data. All the data from websites will be cached as JSON files.
+My project will aggregate all basic information about US national parks from the [National Park Service](https://www.nps.gov/index.htm) website and will scrape 2018 visitors information from [Wikipedia](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States). All the clean data will be automatically imported as a database. The homepage route will have a brief introduction about the site, an explanation of each route, and number of national parks store in the dataset. There will be a route where a user can see all basic information about US national parks such as a name, locations and descriptions. In another route, the user will be able to select a state to view national parks from following state. Also, users will be able to find the most popular national parks in US with a barplot of number of 2018 visitors. All the data from websites will be cached as JSON files.
 
 
 
-<!-- ## How to run
+## How to run
 
-1. First, you should ... (e.g. install all requirements with `pip install -r requirements.txt`)
-2. Second, you should ... (e.g. run `python programname.py runserver` or whatever else is appropriate)
-3. Anything else
+1. First, install all requirements with `pip install -r requirements.txt`
+2. Second, check if there is no problem with installing mataplotlib. If there is a problem, please take a look at [here](https://github.com/shlee2112/si507final/tree/master#important-if-running-into-a-matplotlib-problem).
+3. Third, open Terminal or Command Line and change to appropriate directory using `cd`
+4. Fourth, use `python3 SI507project_tests.py` to run the script
+5. Fifth, use `python3 SI507project_tools.py` to test the script
+
 
 ## How to use
 
-1. A useful instruction goes here
-2. A useful second step here
-3. (Optional): Markdown syntax to include an screenshot/image: ![alt text](image.jpg) -->
+1. When **SI507project_tests.py** runs, it will automatically scrape basic information about national parks from nps.gov and wikipedia. Then, it automatically clean, merge and import the data into a database called **parks.db**. When the database is fully stored, it will run Flask app.
+2. When Flask app is running, copy **http://127.0.0.1:5000/** and paste on a browser url.
+3. Explore different routes described on the [next section](https://github.com/shlee2112/si507final/tree/master#routes-in-this-application).
+
 
 ## Routes in this application
 - `/` -> This is a welcome page with a brief introduction, an explanation of each route and number of national parks store in the dataset.
+![Screenshot of homepage](https://github.com/shlee2112/si507final/blob/master/img/home.png)
+
 - `/info` -> This page will show all the information of national parks in United States.
+![Screenshot of homepage](https://github.com/shlee2112/si507final/blob/master/img/all.png)
+
 - `/info/<statename>` -> This page will take input of a state name and will show information of national parks in a specific state.
+![Screenshot of homepage](https://github.com/shlee2112/si507final/blob/master/img/infomich.png)
+
 - `/mostpopular` -> This page will show a barplot of park visitors in 2018 to view the most popular national park in US.
-
-
-## Database Diagram
-![Image of Database Diagram](https://github.com/shlee2112/si507final/blob/master/img/database_diagram.png)
-
-### Description
-In my database, there are **Parks**, **Cast**, and **Director**, tables.
-
-#### Parks
-**Parks** table has 7 variables: 'id', 'name', 'location', 'description', 'state', 'established_date', and 'visitors_2018'. 'id' is the primary key of this table. Also, 'states' has a many-to-one relationship with 'state' of **States** table.
-
-#### States
-**States** table has 4 variables: 'id', 'state', 'abbreviation' and 'url'. 'id' is the primary key, and 'state' has a one-to-many relationship with 'states' of **Parks** table.
-
-
+![Screenshot of homepage](https://github.com/shlee2112/si507final/blob/master/img/mostpop.png)
 
 ## How to run tests
 1. Cache and grab NPS info, then save as a csv file
 2. Grab Wikipedia data and merge with NPS.csv
 3. Show the most popular national park in US
+
 
 ## In this repository:
 - SI507project_tools.py
@@ -72,9 +69,28 @@ In my database, there are **Parks**, **Cast**, and **Director**, tables.
   - parks.db
   - parks.csv
   - park_info.csv
-- database_diagram.png
+- img
+  - mostpop.pad
+  - infomich.png
+  - home.png
+  - database_diagram.png
+  - all.png
 - requirements.txt
 - README.md
+
+
+
+## Database Diagram
+![Image of Database Diagram](https://github.com/shlee2112/si507final/blob/master/img/database_diagram.png)
+
+### Description
+In my database, there are **Parks**, **Cast**, and **Director**, tables.
+
+#### Parks
+**Parks** table has 7 variables: 'id', 'name', 'location', 'description', 'state', 'established_date', and 'visitors_2018'. 'id' is the primary key of this table. Also, 'states' has a many-to-one relationship with 'state' of **States** table.
+
+#### States
+**States** table has 4 variables: 'id', 'state', 'abbreviation' and 'url'. 'id' is the primary key, and 'state' has a one-to-many relationship with 'states' of **Parks** table.
 
 
 ## Requirements
