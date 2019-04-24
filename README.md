@@ -28,28 +28,34 @@ My project will aggregate all basic information about US national parks from the
 
 ## How to use
 
-1. When **SI507project_tests.py** runs, it will automatically scrape basic information about national parks from nps.gov and wikipedia. Then, it automatically clean, merge and import the data into a database called **parks.db**. When the database is fully stored, it will run Flask app.
+1. When **SI507project_tools.py** runs, it will automatically scrape basic information about national parks from nps.gov and wikipedia. Then, it automatically clean, merge and import the data into a database called **parks.db**. When the database is fully stored, it will run Flask app.
 2. When Flask app is running, copy **http://127.0.0.1:5000/** and paste on a browser url.
 3. Explore different routes described on the [next section](https://github.com/shlee2112/si507final/tree/master#routes-in-this-application).
 
 
 ## Routes in this application
 - `/` -> This is a welcome page with a brief introduction, an explanation of each route and number of national parks store in the dataset.
+Screenshot:
 ![Screenshot of homepage](https://github.com/shlee2112/si507final/blob/master/img/home.png)
 
 - `/info` -> This page will show all the information of national parks in United States.
-![Screenshot of homepage](https://github.com/shlee2112/si507final/blob/master/img/all.png)
+Screenshot:
+![Screenshot of Info page](https://github.com/shlee2112/si507final/blob/master/img/all.png)
 
 - `/info/<statename>` -> This page will take input of a state name and will show information of national parks in a specific state.
-![Screenshot of homepage](https://github.com/shlee2112/si507final/blob/master/img/infomich.png)
+Screenshot:
+![Screenshot of Info by State page](https://github.com/shlee2112/si507final/blob/master/img/infomich.png)
 
 - `/mostpopular` -> This page will show a barplot of park visitors in 2018 to view the most popular national park in US.
-![Screenshot of homepage](https://github.com/shlee2112/si507final/blob/master/img/mostpop.png)
+Screenshot:
+![Screenshot of Most Popular page](https://github.com/shlee2112/si507final/blob/master/img/mostpop.png)
 
 ## How to run tests
-1. Cache and grab NPS info, then save as a csv file
-2. Grab Wikipedia data and merge with NPS.csv
-3. Show the most popular national park in US
+When **SI507project_tools.py** runs,
+1. It will check if data from nps.gov is inside **park_info.csv**.
+2. It will also check if a new CSV file, **states.csv**, contains right information about states.
+3. Then, it will evaluate if data from nps.gov and Wikipedia is appropriate merged as **parks.csv**.
+4. Lastly, it will run `Barplot` class to check if functions are running properly and the database can produce a correct information about the most popular national park.
 
 
 ## In this repository:
@@ -63,7 +69,7 @@ My project will aggregate all basic information about US national parks from the
   - mostpopular.html
 - cache
   - 57 cached JSON files from NPS.gov
-- example_files
+- sample_files
   - wiki_nps.csv
   - states.csv
   - parks.db
@@ -84,18 +90,18 @@ My project will aggregate all basic information about US national parks from the
 ![Image of Database Diagram](https://github.com/shlee2112/si507final/blob/master/img/database_diagram.png)
 
 ### Description
-In my database, there are **Parks**, **Cast**, and **Director**, tables.
+In my database, there are **Parks** and **States** tables.
 
 #### Parks
-**Parks** table has 7 variables: 'id', 'name', 'location', 'description', 'state', 'established_date', and 'visitors_2018'. 'id' is the primary key of this table. Also, 'states' has a many-to-one relationship with 'state' of **States** table.
+**Parks** table has 7 variables: 'id', 'name', 'location', 'description', 'state', 'established_date', and 'visitors_2018'. 'id' is the primary key of this table. Also, 'state' has a many-to-one relationship with 'state' of **States** table. Data from **parks.csv** is automatically imported to this table.
 
 #### States
-**States** table has 4 variables: 'id', 'state', 'abbreviation' and 'url'. 'id' is the primary key, and 'state' has a one-to-many relationship with 'states' of **Parks** table.
+**States** table has 4 variables: 'id', 'state', 'abbreviation' and 'url'. 'id' is the primary key, and 'state' has a one-to-many relationship with 'state' of **Parks** table. Data from **states.csv** is automatically imported to this table.
 
 
 ## Requirements
 
-You need to install **BeautifulSoup** to run this script and get National Sites information. To run this script, you need to install Flask into you computer, because it needs to import Flask when the script is running. You can look at my ***requirements.txt*** file to see all the applications I install to run the script successfully.
+To run this script, you need to install all requirements with `pip install -r requirements.txt`. You can look at my ***requirements.txt*** file to see all the applications I installed to run the script successfully.
 
 #### requirement.txt
 - alabaster==0.7.12
@@ -150,14 +156,14 @@ You need to install **BeautifulSoup** to run this script and get National Sites 
 - Werkzeug==0.15.2
 
 
-## IMPORTANT (If running into a matplotlib problem)
+## **IMPORTANT (If running into a matplotlib problem)**
 ***To be able to run my script using virtualenv, you may need to reinstall Python as a framework.***
 ***If you get a message like this:***
 ```
 from matplotlib.backends import _macosx
 RuntimeError: Python is not installed as a framework. The Mac OS X backend will not be able to function correctly if Python is not installed as a framework. See the Python documentation for more information on installing Python as a framework on Mac OS X. Please either reinstall Python as a framework, or try one of the other backends. If you are using (Ana)Conda please install python.app and replace the use of 'python' with 'pythonw'. See 'Working with Matplotlib on OSX' in the Matplotlib FAQ for more information.
 ```
-***Please follow*** [here](https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrqC4mvoIY) ***to fix the problem, or try the following:***
+***Please follow*** [here](https://paper.dropbox.com/doc/SI507-Final-Project-by-Sanghyun-Lee-nyB9qmNUfzMIrqC4mvoIY) ***to fix the problem, or try the following before running the virtualenv:***
 
 ```
 echo "backend: TkAgg" >> ~/.matplotlib/matplotlibrc
@@ -173,28 +179,28 @@ brew install python3 --with-tcl-tk
 ---
 ## Code Requirements for Grading
 Please check the requirements you have accomplished in your code as demonstrated.
-- [ ] This is a completed requirement.
+- [x] This is a completed requirement.
 - [ ] This is an incomplete requirement.
 
 Below is a list of the requirements listed in the rubric for you to copy and paste.  See rubric on Canvas for more details.
 
 ### General
-- [ ] Project is submitted as a Github repository
-- [ ] Project includes a working Flask application that runs locally on a computer
-- [ ] Project includes at least 1 test suite file with reasonable tests in it.
-- [ ] Includes a `requirements.txt` file containing all required modules to run program
-- [ ] Includes a clear and readable README.md that follows this template
-- [ ] Includes a sample .sqlite/.db file
-- [ ] Includes a diagram of your database schema
-- [ ] Includes EVERY file needed in order to run the project
-- [ ] Includes screenshots and/or clear descriptions of what your project should look like when it is working
+- [x] Project is submitted as a Github repository
+- [x] Project includes a working Flask application that runs locally on a computer
+- [x] Project includes at least 1 test suite file with reasonable tests in it.
+- [x] Includes a `requirements.txt` file containing all required modules to run program
+- [x] Includes a clear and readable README.md that follows this template
+- [x] Includes a sample .sqlite/.db file
+- [x] Includes a diagram of your database schema
+- [x] Includes EVERY file needed in order to run the project
+- [x] Includes screenshots and/or clear descriptions of what your project should look like when it is working
 
 ### Flask Application
-- [ ] Includes at least 3 different routes
-- [ ] View/s a user can see when the application runs that are understandable/legible for someone who has NOT taken this course
-- [ ] Interactions with a database that has at least 2 tables
+- [x] Includes at least 3 different routes
+- [x] View/s a user can see when the application runs that are understandable/legible for someone who has NOT taken this course
+- [x] Interactions with a database that has at least 2 tables
 - [x] At least 1 relationship between 2 tables in database
-- [ ] Information stored in the database is viewed or interacted with in some way
+- [x] Information stored in the database is viewed or interacted with in some way
 
 ### Additional Components (at least 6 required)
 - [x] Use of a new module
@@ -212,5 +218,5 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 - [x] Caching of data you continually retrieve from the internet in some way
 
 ### Submission
-- [ ] I included a link to my GitHub repository with the correct permissions on Canvas! (Did you though? Did you actually? Are you sure you didn't forget?)
-- [ ] I included a summary of my project and how I thought it went **in my Canvas submission**!
+- [x] I included a link to my GitHub repository with the correct permissions on Canvas! (Did you though? Did you actually? Are you sure you didn't forget?)
+- [x] I included a summary of my project and how I thought it went **in my Canvas submission**!
